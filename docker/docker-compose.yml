@@ -1,0 +1,20 @@
+version: '3'
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  php:
+    build:
+      context: ./php
+    container_name: php-container
+    restart: always
+    ports:
+      - 9002:80
+    environment:
+      DEBUG: "true"
+    volumes:
+      - ../:/var/www/html
+    networks:
+      - backend
