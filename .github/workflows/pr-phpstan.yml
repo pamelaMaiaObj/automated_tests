@@ -25,5 +25,8 @@ jobs:
       - name: Dumping autoload
         run: composer dumpautoload -o
 
-      - name: Iniciando testes stan  \0/ ...
-        run: make stan-tests
+      - name: starting test stan folder src  \0/ ...
+        run: make stan-tests-src
+
+      - name: starting test stan folder src  \0/ ...
+        run: make stan-tests-tests

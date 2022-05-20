@@ -16,8 +16,17 @@ docker-config: ## List the configuration
 docker-prune: ## Remove ALL unused docker resources, including volumes
 	@docker system prune -a -f --volumes
 
-stan-tests:
+stan-tests-src:
 	./vendor/bin/phpstan analyse --level=max src tests
+
+stan-tests-tests:
+	./vendor/bin/phpstan analyse --level=max tests tests
 
 unit-tests:
 	./vendor/bin/phpunit ./tests
+
+cs-tests-tests:
+	./vendor/bin/php-cs-fixer fix tests -v --dry-run
+
+cs-tests-src:
+	./vendor/bin/php-cs-fixer fix src -v --dry-run
