@@ -6,7 +6,7 @@ use App\Classes\Numbers;
 use InvalidArgumentException;
 
 /**
- * Class responsible for validating if a number is multiple of (3, 5, 7)
+ * class responsible for transforming a sentence into numbers and checking if their sum is prime, multiples or happy
  */
 class WordsInNumbers
 {
