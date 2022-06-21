@@ -44,6 +44,18 @@ class Numbers
      * @param int $number
      * @return bool
      */
+    public function isPrime(int $number): bool
+    {
+        if (gmp_prob_prime($number) == 2) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param int $number
+     * @return bool
+     */
     public function isNegative(int $number): bool
     {
         return ($number < 0);
@@ -74,5 +86,67 @@ class Numbers
     public function verifyMultipleThreeOrFiveAndSeven(int $number): bool
     {
         return ($this->verifyMultipleThreeOrFive($number) && $this->isMultiple($number, 7));
+    }
+
+    /**
+     * @param array<string> $words
+     * @return array<string, int>
+     */
+    public function getArrayWordsSum(array $words): array
+    {
+        return array_merge(
+            ...array_map(function ($word) {
+                return [$word => $this->sumNumbersValuesWord($word)];
+            }, $words)
+        );
+    }
+
+    /**
+     * @param string $words
+     * @return string
+     */
+    public function cleanWords(string $words): string
+    {
+        return trim((string)preg_replace(["/[^a-z A-Z]/", "/\s+/"], " ", $words));
+    }
+
+    /**
+     * @param string $word
+     * @return int
+     */
+    public function sumNumbersValuesWord(string $word): int
+    {
+        $alfa = $this->getArrayAlphabetCaseSensitive();
+        return (int)array_sum(
+            array_map(function ($letter) use ($alfa) {
+                if ($alfa[$letter] != null) {
+                    return $alfa[$letter];
+                }
+            }, str_split($word))
+        );
+    }
+
+    /**
+     * @return array<int|string>
+     */
+    public function getArrayAlphabetCaseSensitive(): array
+    {
+        return array_replace($this->getArrayAlphabetLowerCase(), $this->getArrayAlphabetUpperCase());
+    }
+
+    /**
+     * @return array<int|string>
+     */
+    public function getArrayAlphabetUpperCase(): array
+    {
+        return array_combine(range('A', 'Z'), range(27, 52));
+    }
+
+    /**
+     * @return array<int|string>
+     */
+    public function getArrayAlphabetLowerCase(): array
+    {
+        return array_combine(range('a', 'z'), range(1, 26));
     }
 }
